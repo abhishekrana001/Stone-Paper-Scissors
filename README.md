@@ -1,96 +1,97 @@
-# ✊ Stone Paper Scissors Game
+# 🪨 Rock Paper Scissors
 
-A simple and interactive **Stone Paper Scissors** game built using **HTML, CSS, and JavaScript**.
-The game allows the user to play against the computer with a simple and user-friendly interface.
+A sleek, modern **Rock Paper Scissors** game built with vanilla HTML, CSS, and JavaScript — featuring a premium dark glassmorphism UI and smooth animations.
 
-## ✨ Features
+## 🎮 Live Demo
 
-* ✊ Stone, Paper, and Scissors options
-* 🤖 Play against the computer
-* 🎯 Random computer choice
-* 🏆 Automatic winner detection
-* 📊 Score tracking
-* 🔄 Reset game functionality
-* 📱 Responsive design
-* ⚡ Fast and lightweight
-* 🎨 Simple and user-friendly interface
-
-## 🛠️ Technologies Used
-
-* **HTML5** – Used to create the structure of the game.
-* **CSS3** – Used for styling and responsive design.
-* **JavaScript** – Used to implement the game logic and user interactions.
-
-## 📂 Project Structure
-
-```text
-Stone-Paper-Scissors/
-│
-├── index.html
-├── style.css
-├── script.js
-└── README.md
-```
-
-> File names may vary depending on the structure of the project.
-
-## 🎮 How to Play
-
-1. Open the game in your browser.
-2. Select **Stone**, **Paper**, or **Scissors**.
-3. The computer randomly selects one option.
-4. The game compares both choices.
-5. The winner is displayed based on the game rules.
-6. The score is updated after each round.
-7. Use the **Reset** button to start a new game.
-
-## 🧠 Game Rules
-
-The winner is decided using the following rules:
-
-* ✊ **Stone beats Scissors**
-* 📄 **Paper beats Stone**
-* ✂️ **Scissors beats Paper**
-* 🤝 If both choices are the same, the round is a draw.
-
-## 💻 Game Logic
-
-The game is implemented using JavaScript.
-
-The main logic includes:
-
-* Taking the user's choice
-* Generating a random computer choice
-* Comparing user and computer choices
-* Determining the winner
-* Updating the score
-* Displaying the game result
-* Resetting the game
-
-## 📱 Responsive Design
-
-The game interface is designed to work across different screen sizes, including:
-
-* 💻 Desktop
-* 💻 Laptop
-* 📱 Mobile
-* 📱 Tablet
-
-## 📚 What I Learned
-
-While building this project, I practiced:
-
-* HTML structure and semantic elements
-* CSS styling and responsive design
-* JavaScript DOM manipulation
-* JavaScript event handling
-* Random number generation
-* Conditional statements
-* Functions
-* Arrays
-* Game logic implementation
-* Git and GitHub
+> Open `index.html` in your browser to play instantly — no installation needed!
 
 ---
 
-**Made with ❤️ using HTML, CSS & JavaScript**
+## ✨ Features
+
+- 🌑 **Dark Glassmorphism UI** — Deep navy background with frosted-glass cards
+- ⚔️ **Battle Arena** — See your pick vs CPU pick side-by-side with glow effects
+- 🎯 **Score Tracking** — Persistent score board with animated score bumps
+- 🟢🔴🟡 **Visual Feedback** — Green (win), Red (lose), Amber (draw) glow states
+- 💫 **Smooth Animations** — Hover lifts, pop-in effects, floating background blobs
+- 📱 **Fully Responsive** — Works great on mobile and desktop
+- 🔄 **Reset Game** — One-click full reset with state cleanup
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Usage |
+|------------|-------|
+| HTML5 | Structure & Semantic Markup |
+| CSS3 | Glassmorphism, Animations, Flexbox |
+| Vanilla JavaScript | Game Logic, DOM Manipulation |
+| Google Fonts (Outfit) | Modern Typography |
+
+---
+
+## 📁 Project Structure
+
+```
+Stone-Paper-Scissors/
+├── index.html       # Main HTML file
+├── style.css        # All styles (design system + animations)
+├── app.js           # Game logic & DOM interactions
+├── images/
+│   ├── rock.png
+│   ├── paper.png
+│   └── scissors.png
+├── .gitignore
+└── README.md
+```
+
+---
+
+## 🚀 How to Run
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/abhishekrana001/Stone-Paper-Scissors.git
+   ```
+
+2. **Navigate to the project folder**
+   ```bash
+   cd Stone-Paper-Scissors
+   ```
+
+3. **Open in browser**
+   ```bash
+   # Simply open index.html in any modern browser
+   start index.html   # Windows
+   open index.html    # macOS
+   ```
+
+---
+
+## 🎯 Game Rules
+
+| You \ CPU | Rock | Paper | Scissors |
+|-----------|------|-------|----------|
+| **Rock**     | Draw | Lose  | **Win**  |
+| **Paper**    | **Win** | Draw | Lose  |
+| **Scissors** | Lose | **Win** | Draw  |
+
+---
+
+## 📸 Preview
+
+> Dark glassmorphism design with animated background, battle arena, and score board.
+
+---
+
+## 👤 Author
+
+**Abhishek Rana**
+- GitHub: [@abhishekrana001](https://github.com/abhishekrana001)
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).

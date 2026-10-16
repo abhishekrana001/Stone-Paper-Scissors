@@ -1,134 +1,574 @@
-*{
+/* =============================================
+   DESIGN TOKENS
+   ============================================= */
+:root {
+    --bg: #0a0e1a;
+    --surface: rgba(255, 255, 255, 0.05);
+    --surface-hover: rgba(255, 255, 255, 0.1);
+    --border: rgba(255, 255, 255, 0.08);
+    --border-glow: rgba(139, 92, 246, 0.5);
+    --accent: #8b5cf6;
+    --accent-2: #06b6d4;
+    --accent-glow: rgba(139, 92, 246, 0.3);
+    --win: #10b981;
+    --win-glow: rgba(16, 185, 129, 0.3);
+    --lose: #ef4444;
+    --lose-glow: rgba(239, 68, 68, 0.3);
+    --draw: #f59e0b;
+    --draw-glow: rgba(245, 158, 11, 0.3);
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --font: 'Outfit', sans-serif;
+    --radius: 1.5rem;
+    --radius-sm: 0.75rem;
+    --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =============================================
+   RESET & BASE
+   ============================================= */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font);
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* =============================================
+   ANIMATED BACKGROUND BLOBS
+   ============================================= */
+.bg-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    pointer-events: none;
+    animation: blobFloat 8s ease-in-out infinite;
+}
+
+.blob-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--accent);
+    top: -10%;
+    left: -10%;
+    animation-delay: 0s;
+}
+
+.blob-2 {
+    width: 300px;
+    height: 300px;
+    background: var(--accent-2);
+    bottom: -5%;
+    right: -5%;
+    animation-delay: -3s;
+}
+
+.blob-3 {
+    width: 200px;
+    height: 200px;
+    background: #ec4899;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -6s;
+}
+
+@keyframes blobFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+}
+
+/* =============================================
+   CONTAINER
+   ============================================= */
+.container {
+    width: min(95%, 680px);
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* =============================================
+   HEADER
+   ============================================= */
+.header {
     text-align: center;
 }
 
-h1{
-    background-color: #081b31;
-    color: #fff;
-    height: 5rem;
-    line-height: 5rem;
+.header h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, var(--text-muted) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header h1 .accent {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin-top: 0.3rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* =============================================
+   SCORE BOARD
+   ============================================= */
+.score-board {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.score-card {
+    flex: 1;
+    background: var(--surface);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    transition: var(--transition);
+}
+
+.score-card.winner-flash {
+    animation: winnerPulse 0.6s ease;
+}
+
+@keyframes winnerPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); border-color: var(--win); box-shadow: 0 0 25px var(--win-glow); }
+}
+
+.score-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.score-value {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: var(--transition);
+}
+
+.vs-badge {
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* =============================================
+   BATTLE ARENA
+   ============================================= */
+.battle-arena {
+    width: 100%;
+    background: var(--surface);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 140px;
+}
+
+.arena-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.arena-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.arena-display {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    border: 2px dashed rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.arena-display img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 50%;
+    animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popIn {
+    from { transform: scale(0) rotate(-180deg); opacity: 0; }
+    to { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.placeholder-icon {
+    font-size: 2rem;
+    opacity: 0.2;
+}
+
+.arena-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fight-icon {
+    font-size: 2rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.arena-display.win-glow {
+    border-color: var(--win);
+    box-shadow: 0 0 20px var(--win-glow);
+}
+
+.arena-display.lose-glow {
+    border-color: var(--lose);
+    box-shadow: 0 0 20px var(--lose-glow);
+}
+
+.arena-display.draw-glow {
+    border-color: var(--draw);
+    box-shadow: 0 0 20px var(--draw-glow);
+}
+
+/* =============================================
+   MESSAGE
+   ============================================= */
+.msg-container {
+    width: 100%;
+    text-align: center;
+}
+
+#msg {
+    display: inline-block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 100px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    transition: var(--transition);
+    letter-spacing: 0.5px;
+}
+
+#msg.win {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.4);
+    color: #34d399;
+}
+
+#msg.lose {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #f87171;
+}
+
+#msg.draw {
+    background: rgba(245, 158, 11, 0.15);
+    border-color: rgba(245, 158, 11, 0.4);
+    color: #fbbf24;
+}
+
+/* =============================================
+   CHOICES
+   ============================================= */
+.choices {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
 }
 
 .choice {
-    height: 165px;
-    width: 165px;
-    border-radius: 50%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-}
-.choice:hover{
+    gap: 0.6rem;
     cursor: pointer;
-    background-color: #081b31;
+    transition: var(--transition);
+    position: relative;
 }
-img{
-    height: 150px;
-    width: 150px;
+
+.choice::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: transparent;
+    transition: var(--transition);
+}
+
+.choice-inner {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+}
+
+.choice img {
+    width: 90px;
+    height: 90px;
     object-fit: contain;
     border-radius: 50%;
+    transition: var(--transition);
+    display: block;
 }
 
-.choices{
+.choice-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: var(--transition);
+}
+
+/* Wrap img in inner div via JS isn't needed — style directly */
+.choice {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--border);
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 3rem;
-    margin-top: 5rem;
-}
-
-.score-board{
-    display: flex;
     justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    margin-top: 3rem;
-    gap: 5rem;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    position: relative;
 }
 
-#user-score, #comp-score{
-    font-size: 4rem;
+.choice img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
 }
 
-.msg-container{
-    margin-top: 5rem;
+.choice-label {
+    position: absolute;
+    bottom: -2rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: var(--transition);
+    white-space: nowrap;
 }
 
-#msg{
-    background-color: #081b31;
+.choices {
+    padding-bottom: 2.5rem;
+}
+
+.choice:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 30px var(--accent-glow), 0 8px 25px rgba(0,0,0,0.4);
+    transform: translateY(-6px) scale(1.05);
+}
+
+.choice:hover img {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.choice:hover .choice-label {
+    color: var(--accent);
+}
+
+.choice:active {
+    transform: translateY(-2px) scale(0.97);
+}
+
+.choice.selected {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* =============================================
+   RESET BUTTON
+   ============================================= */
+.btn {
+    font-family: var(--font);
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
     color: #fff;
-    height: 5rem;
-    font-size: 2rem;
-    display: inline;
-    padding: 1rem;
-    border-radius: 1rem;
-}
-
-.btn{
-    margin-top: 2rem;
-    background-color: #081b31;
-    color: #fff;
-    height: 5rem;
-    font-size: 2rem;
-    display: inline;
-    padding: 1rem;
     border: none;
-    border-radius: 1rem;
+    border-radius: 100px;
+    padding: 0.9rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    letter-spacing: 1px;
+    box-shadow: 0 4px 20px var(--accent-glow);
+    position: relative;
+    overflow: hidden;
 }
 
+.btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0);
+    transition: var(--transition);
+}
 
-@media (max-width: 600px) {
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--accent-glow);
+}
 
-    h1 {
-        height: 4rem;
-        line-height: 4rem;
-        font-size: 1.8rem;
+.btn:hover::after {
+    background: rgba(255,255,255,0.1);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* =============================================
+   SCORE COUNT ANIMATION
+   ============================================= */
+@keyframes scoreUp {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+}
+
+.score-bump {
+    animation: scoreUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 480px) {
+    .container {
+        gap: 1.2rem;
+        margin: 1rem auto;
     }
 
     .choices {
         gap: 1rem;
-        margin-top: 3rem;
-        flex-wrap: wrap;
+        padding-bottom: 2.5rem;
     }
 
     .choice {
-        height: 110px;
-        width: 110px;
+        width: 90px;
+        height: 90px;
     }
 
-    img {
-        height: 100px;
-        width: 100px;
+    .choice img {
+        width: 65px;
+        height: 65px;
     }
 
-    .score-board {
-        font-size: 1.3rem;
-        gap: 2rem;
-        margin-top: 2.5rem;
+    .score-value {
+        font-size: 2.5rem;
     }
 
-    #user-score,
-    #comp-score {
-        font-size: 3rem;
+    .battle-arena {
+        padding: 1rem;
+        min-height: 110px;
     }
 
-    .msg-container {
-        margin-top: 3rem;
-        padding: 0 15px;
+    .arena-display {
+        width: 70px;
+        height: 70px;
     }
 
-    #msg {
-        font-size: 1.2rem;
-        padding: 0.8rem;
-        border-radius: 0.7rem;
+    .arena-display img {
+        width: 52px;
+        height: 52px;
     }
 
     .btn {
-        margin-top: 1.5rem;
-        height: auto;
-        font-size: 1.2rem;
-        padding: 0.8rem 1.2rem;
-        border-radius: 0.7rem;
+        padding: 0.75rem 1.8rem;
+        font-size: 0.9rem;
+    }
+
+    #msg {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
     }
 }

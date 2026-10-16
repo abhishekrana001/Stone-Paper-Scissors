@@ -3,39 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors Game</title>
+    <title>Rock Paper Scissors – Play Now</title>
+    <meta name="description" content="Play the classic Rock Paper Scissors game with a stunning modern UI. Challenge the computer and track your score!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Rock Paper Scissors</h1>
-    <div class="choices">
-        <div class="choice" id="rock">
-            <img src="./images/rock.png" alt="rock">
-        </div>
-        <div class="choice" id="paper">
-             <img src="./images/paper.png" alt="paper">
-        </div>
-        <div class="choice" id="scissors">
-            <img src="./images/scissors.png" alt="scissors">
-        </div>
-    </div>
+    <!-- Animated background blobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
 
-    <div class="score-board">
-        <div class="score">
-            <p id="user-score">0</p>
-            <p>You</p>
-        </div>
-        <div class="score">
-            <p id="comp-score">0</p>
-            <p>Comp</p>
-        </div>
-    </div>
-    
-    <div class="msg-container">
-        <p id="msg">Play your move</p>
-    </div>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Rock <span class="accent">Paper</span> Scissors</h1>
+            <p class="subtitle">Challenge the Computer</p>
+        </header>
 
-    <button class="btn">Reset</button>
+        <!-- Score Board -->
+        <div class="score-board" id="score-board">
+            <div class="score-card" id="user-card">
+                <span class="score-label">YOU</span>
+                <span class="score-value" id="user-score">0</span>
+            </div>
+            <div class="vs-badge">VS</div>
+            <div class="score-card" id="comp-card">
+                <span class="score-label">CPU</span>
+                <span class="score-value" id="comp-score">0</span>
+            </div>
+        </div>
+
+        <!-- Battle Arena -->
+        <div class="battle-arena" id="battle-arena">
+            <div class="arena-side" id="user-arena">
+                <p class="arena-label">Your Pick</p>
+                <div class="arena-display" id="user-display">
+                    <span class="placeholder-icon">?</span>
+                </div>
+            </div>
+            <div class="arena-center">
+                <div class="fight-icon" id="fight-icon">⚔️</div>
+            </div>
+            <div class="arena-side" id="comp-arena">
+                <p class="arena-label">CPU Pick</p>
+                <div class="arena-display" id="comp-display">
+                    <span class="placeholder-icon">?</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message -->
+        <div class="msg-container">
+            <p id="msg" class="msg">Pick your move to start!</p>
+        </div>
+
+        <!-- Choices -->
+        <div class="choices">
+            <div class="choice" id="rock" title="Rock">
+                <img src="./images/rock.png" alt="Rock">
+                <span class="choice-label">Rock</span>
+            </div>
+            <div class="choice" id="paper" title="Paper">
+                <img src="./images/paper.png" alt="Paper">
+                <span class="choice-label">Paper</span>
+            </div>
+            <div class="choice" id="scissors" title="Scissors">
+                <img src="./images/scissors.png" alt="Scissors">
+                <span class="choice-label">Scissors</span>
+            </div>
+        </div>
+
+        <!-- Reset -->
+        <button class="btn" id="reset-btn">🔄 Reset Game</button>
+    </div>
 
     <script src="app.js"></script>
 </body>
